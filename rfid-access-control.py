@@ -1,12 +1,12 @@
 import sys, os, time
-from OmegaExpansion import oledExp
+#from OmegaExpansion import oledExp
 from OmegaExpansion import relayExp
 import subprocess
 import json
 
 #initializing the Relay and Oled Expansions, and block the lock if it's open
 def initial_setup():
-        status_oled = oledExp.driverInit()
+        #status_oled = oledExp.driverInit()
         status_relay = relayExp.driverInit(7)	# 7 is the address of the Relay Expansion; 7 is when all relay switches are switched OFF
         check = relayExp.readChannel(7, 0)	# (7, 0) - again 7 is the address and 0 is the relay channel
         if check == 1:
@@ -28,11 +28,11 @@ def open_lock():
 
 #function to access the lock for 5 seconds, print the output on the OLED expansion and close the lock
 def access_lock(uid):
-        oledExp.write("Your UID is: " + uid)
+        #oledExp.write("Your UID is: " + uid)
         relayExp.setChannel(7,0,1)
         time.sleep(5)
         relayExp.setChannel(7,0,0)
-        oledExp.clear()
+        #oledExp.clear()
         return
 
 #constantly scan for the rfid tag presence
